@@ -3,13 +3,15 @@
 
 <h1>My Car List</h1>
 
-{% for car in Cars %}
+{% for car in cars %}
   <div class="card">
+    <a href="{% url 'detail' car.id %}">
     <div class="card-content">
       <span class="card-title">{{ car.make }}</span>
       <p>Model: {{ car.model }}</p>
       <p>year: {{ car.year }}</p>
     </div>
+    </a>
   </div>
 {% endfor %}
 
