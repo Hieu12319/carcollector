@@ -10,6 +10,10 @@
     <p>year: {{ car.year }}</p>
     
   </div>
+  <div class="card-action">
+    <a href="{% url 'cars_update' cat.id %}">Edit</a>
+    <a href="{% url 'cars_delete' cat.id %}">Delete</a>
+  </div>
 </div>
 
 {% endblock %}
