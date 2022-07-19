@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>{{ car.make }}</h1>
+<h1>My Car</h1>
 
 <div class="card">
   <div class="card-content">
@@ -15,5 +15,20 @@
     <a href="{% url 'cars_delete' car.id %}">Delete Current Car</a>
   </div>
 </div>
-
+<div class="col s6">
+  <table class="striped">
+    <thead>
+      <tr><th>Date</th><th>Maintenance</th></tr>
+    </thead>
+    <tbody>
+      {% for maintain in car.maintenance_set.all %}
+        <tr>
+          <td>{{maintenance.date}}</td>
+          <td>{{maintenance.get_maintain_display}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</div>
 {% endblock %}
