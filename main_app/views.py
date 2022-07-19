@@ -6,4 +6,4 @@ def home(request):
     return HttpResponse('<h1> Hello Car-World </h1>')
 
 def about(request):
-    return HttpResponse('This is my Car collector About page')
+    return render(request, 'about.html')
