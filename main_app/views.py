@@ -21,4 +21,4 @@ def about(request):
     return render(request, 'about.html')
 
 def cars_index(request):
-    return render(request, 'cats/index.html', { 'cars' : cars })
+    return render(request, 'cars/index.html', { 'cars' : cars })
