@@ -25,7 +25,7 @@ def cars_detail(request, car_id):
 def add_maintenance(request, car_id):
     form = MaintenanceForm(request.POST)
     if form.is_valid():
-        new_maintenance = form.save(commit=FALSE)
+        new_maintenance = form.save(commit=False)
         new_maintenance.car_id = car_id
         new_maintenance.save()
     return redirect('detail', car_id=car_id)
