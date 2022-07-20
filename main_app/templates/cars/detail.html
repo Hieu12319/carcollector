@@ -39,4 +39,16 @@
     </table>
   </div>
 </div>
+<script>
+   var dateEl = document.getElementById('id_date');
+  M.Datepicker.init(dateEl, {
+    format: 'yyyy-mm-dd',
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true
+  });
+  var selectEl = document.getElementById('id_maintain');
+  M.FormSelect.init(selectEl);
+
+</script>
 {% endblock %}
