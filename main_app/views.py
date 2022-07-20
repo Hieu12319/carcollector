@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Car
+from .forms import MaintenanceForm
 # Create your views here.
 #class Car:  
 #  def __init__(self, make, model, year):
@@ -26,7 +27,9 @@ def cars_index(request):
 
 def cars_detail(request, car_id):
     car = Car.objects.get(id=car_id)
-    return render(request, 'cars/detail.html', {'car': car})
+    maintenance_form = MaintenanceForm()
+    return render(request, 'cars/detail.html', {'car': car, 'maintenance_form': maintenance_form
+    })
 
 class CarCreate(CreateView):
     model = Car

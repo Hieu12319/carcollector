@@ -4,4 +4,4 @@ from .models import Maintenance
 class MaintenanceForm(ModelForm):
     class Meta:
         model = Maintenance
-        fields= ['date', ' maintain']
+        fields= ['date', 'maintain']
