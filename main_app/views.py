@@ -1,7 +1,8 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Car
+from django.views.generic import ListView, DetailView
+from .models import Car, Gas
 from .forms import MaintenanceForm
 # Create your views here.
 
@@ -42,3 +43,21 @@ class CarUpdate(UpdateView):
 class CarDelete(DeleteView):
     model = Car
     success_url= '/cars/'
+
+class GasList(ListView):
+    model = Gas
+
+class GasDetail(DetailView):
+    model = Gas
+
+class GasCreate(CreateView):
+    model = Gas
+    fields = '__all__'
+
+class GasUpdate(UpdateView):
+    model = Gas
+    fields = ['type', 'location']
+
+class GasDelete(DeleteView):
+    model = Gas
+    success_url = '/gas/'

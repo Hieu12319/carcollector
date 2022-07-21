@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Gas List</h1>
+
+{% for gas in gas_list %}
+  <a href="{% url 'gas_detail' gas.id %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">{{ gas.name }}</span>
+        </div>
+    </div>
+  </a>
+{% endfor %}
+
+{% endblock %}

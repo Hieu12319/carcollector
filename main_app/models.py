@@ -8,6 +8,16 @@ MAINTAIN = (
     ('V', 'Valve adjustement')
 )
 # Create your models here.
+class Gas(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('gas_detail', kwargs={'pk': self.id})
+
+
 class Car(models.Model):
     make = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
