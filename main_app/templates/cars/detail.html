@@ -43,18 +43,37 @@
 <div class="row">
   <div class="col s6">
     <h3>{{ car.make }}</h3>
-  {% if car.gas.count %}
-    {% for gas in car.gas.all %}
+  {% if car.gases.count %}
+    {% for gas in car.gases.all %}
       <div class="card">
         <div class="card-content">
-          <span class="card-title">
-            A <span style="color: {{ gas.color }}">{{ gas.color }}</span> {{ gas.name }}
-          </span>
+           <span>{{ gas.name }}</span> 
         </div>
       </div>
       {% endfor %}
     {% else %}
       <h5>No Gas</h5>
+    {% endif %}
+  </div>
+  <div class="col s6">
+    <h3>GASES USED </h3>
+    {% if gases.count %}
+      {% for gas in gases.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              <span>{{ gas.name }}</span> 
+          </div>
+          <div class="card-action">
+            <form action="{% url 'assoc_gas' car.id gas.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn">Add Gas type</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>{{car.model}} Already Has All Gas Types Available</h5>
     {% endif %}
   </div>
 </div>

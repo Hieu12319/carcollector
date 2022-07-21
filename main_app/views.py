@@ -19,9 +19,12 @@ def cars_index(request):
 
 def cars_detail(request, car_id):
     car = Car.objects.get(id=car_id)
+    gas_car_doesnt_have = Gas.objects.exclude(id__in = car.gases.all().values_list('id'))
+    print(gas_car_doesnt_have)
     maintenance_form = MaintenanceForm()
-    return render(request, 'cars/detail.html', {'car': car, 'maintenance_form': maintenance_form
+    return render(request, 'cars/detail.html', {'car': car, 'maintenance_form': maintenance_form, 'gases' : gas_car_doesnt_have
     })
+    
 
 def add_maintenance(request, car_id):
     form = MaintenanceForm(request.POST)
@@ -29,6 +32,10 @@ def add_maintenance(request, car_id):
         new_maintenance = form.save(commit=False)
         new_maintenance.car_id = car_id
         new_maintenance.save()
+    return redirect('detail', car_id=car_id)
+
+def assoc_gas(request, car_id, gas_id):
+    Car.objects.get(id=car_id).gases.add(gas_id)
     return redirect('detail', car_id=car_id)
 
 class CarCreate(CreateView):
