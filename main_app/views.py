@@ -56,7 +56,7 @@ class GasCreate(CreateView):
 
 class GasUpdate(UpdateView):
     model = Gas
-    fields = ['type', 'location']
+    fields = ['name']
 
 class GasDelete(DeleteView):
     model = Gas

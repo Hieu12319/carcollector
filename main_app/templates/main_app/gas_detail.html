@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Toy Details</h1>
+<h1>Gas Types</h1>
 
 <div class="row">
   <div class="col s6 col-offset-3">
@@ -10,8 +10,8 @@
         <span class="card-title">{{ gas.name}}</span>
       </div>
       <div class="card-action">
-        <a href="{% url 'gas_update' toy.id %}">Edit</a>
-        <a href="{% url 'gas_delete' toy.id %}">Delete</a>
+        <a href="{% url 'gas_update' gas.id %}">Edit</a>
+        <a href="{% url 'gas_delete' gas.id %}">Delete</a>
       </div>
     </div>
   </div>
