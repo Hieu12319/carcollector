@@ -44,4 +44,10 @@ class Maintenance(models.Model):
     def __str__(self):
         return f"{self.get_maintain_display()} on {self.date}"
     
+class Photo(models.Model):
+    url = models.CharField(max_length=300)
+    car = models.ForeignKey(Car, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Photo for car_id: {self.car_id} @{self.url}"
     

@@ -2,9 +2,14 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
-from .models import Car, Gas
+from .models import Car, Gas, Photo
 from .forms import MaintenanceForm
+import uuid
+import boto3
 # Create your views here.
+
+S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
+BUCKET = 'carcollecto'
 
 
 def home(request):
@@ -38,6 +43,20 @@ def assoc_gas(request, car_id, gas_id):
     Car.objects.get(id=car_id).gases.add(gas_id)
     return redirect('detail', car_id=car_id)
 
+def add_photo(request, car_id):
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            photo = Photo(url=url, car_id=car_id)
+            photo.save()
+        except:
+            print('An error occured uploading file to s3')
+    return redirect('detail', car_id=car_id)
+    
 class CarCreate(CreateView):
     model = Car
     fields = ['make', 'model', 'year']
