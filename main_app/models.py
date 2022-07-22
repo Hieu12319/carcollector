@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from datetime import date
+from django.contrib.auth.models import User
 
 MAINTAIN = (
     ('O', 'Oil Change'),
@@ -23,6 +25,7 @@ class Car(models.Model):
     model = models.CharField(max_length=100)
     year = models.TextField()
     gases = models.ManyToManyField(Gas)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.make} - {self.model}"
